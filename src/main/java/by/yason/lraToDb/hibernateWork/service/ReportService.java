@@ -17,7 +17,8 @@ public class ReportService {
     }
 
     public void saveReport(String absolutePath) throws IOException, ParseException {
-        Report report = new Report(absolutePath);
+        long id=reportRepo.count();
+        Report report = new Report(absolutePath,id);
         System.out.println("end create report");
         reportRepo.save(report);
     }

@@ -1,5 +1,6 @@
 package by.yason.lraToDb.report.entity;
 
+import lombok.Data;
 import org.jsoup.nodes.Element;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-
+@Data
 @Entity
 public class HttpCodes implements Serializable {
     @Id
@@ -16,6 +17,9 @@ public class HttpCodes implements Serializable {
     private String name;
     private int total;
     private double perSecond;
+
+    public HttpCodes() {
+    }
 
     public HttpCodes(Element s) {
 //.//td[@headers = 'LraHTTP Responses']/span/text()

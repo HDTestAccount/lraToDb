@@ -1,5 +1,6 @@
 package by.yason.lraToDb.report.entity;
 
+import lombok.Data;
 import org.jsoup.nodes.Document;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Data
 @Entity
 public class RunSummary implements Serializable {
     @Id
@@ -47,11 +49,11 @@ public class RunSummary implements Serializable {
         System.out.println("run summary parsing date end");
 
         maximumRunningVusers = Integer.parseInt(reportDoc.select("td[headers=LraMaximumRunningVusers]").text());
-        totalThroughputBytes = Double.parseDouble(reportDoc.select("td[headers=LraTotalThroughput]").text().replaceAll(" ",""));
-        averageThroughputBytesSecond = Integer.parseInt(reportDoc.select("td[headers=LraAverageThroughput]").text().replaceAll(" ",""));
-        totalHits = Integer.parseInt(reportDoc.select("td[headers=LraTotalHits]").text().replaceAll(" ",""));
-        averageHitsPerSecond = Double.parseDouble(reportDoc.select("td[headers=LraAverageHitsPerSecond]").text().replaceAll(" ",""));
-        totalErrors = Integer.parseInt(reportDoc.select("td[headers=LraTotalErrors]").text().replaceAll(" ",""));
+        totalThroughputBytes = Double.parseDouble(reportDoc.select("td[headers=LraTotalThroughput]").text().replaceAll(" ", ""));
+        averageThroughputBytesSecond = Integer.parseInt(reportDoc.select("td[headers=LraAverageThroughput]").text().replaceAll(" ", ""));
+        totalHits = Integer.parseInt(reportDoc.select("td[headers=LraTotalHits]").text().replaceAll(" ", ""));
+        averageHitsPerSecond = Double.parseDouble(reportDoc.select("td[headers=LraAverageHitsPerSecond]").text().replaceAll(" ", ""));
+        totalErrors = Integer.parseInt(reportDoc.select("td[headers=LraTotalErrors]").text().replaceAll(" ", ""));
         System.out.println("run summary end");
     }
 

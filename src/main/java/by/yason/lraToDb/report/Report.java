@@ -18,9 +18,11 @@ import java.util.Set;
 
 @Entity
 public class Report implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "TransactionsRunId", nullable = false)
@@ -35,10 +37,7 @@ public class Report implements Serializable {
     @JoinColumn(name = "runSummary", nullable = false)
     RunSummary runSummary = new RunSummary();
 
-    public Report() {
-    }
-
-    public Report(String reportFileName) throws IOException, ParseException {
+    public Report(String reportFileName, long id) throws IOException, ParseException {
         Document reportDoc = FileUtils.ReadFile(reportFileName);
         System.out.println("runHttpCodes");
         CreateListHttpCodes(reportDoc);
@@ -46,6 +45,8 @@ public class Report implements Serializable {
         CreateLisTransactions(reportDoc);
         System.out.println("runSummary");
         runSummary = new RunSummary(reportDoc);
+        name = runSummary.getStartDate().toString();
+        this.id = id+1;
     }
 
     public void CreateListHttpCodes(Document reportDoc) {
@@ -56,6 +57,9 @@ public class Report implements Serializable {
                 httpCodes.add(new HttpCodes(s));
             }
         }
+    }
+
+    public Report() {
     }
 
     public void CreateLisTransactions(Document document) {
